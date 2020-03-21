@@ -1,5 +1,7 @@
 package ua.lviv.lgs.magazineShop.dao;
 
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,14 +15,16 @@ public class DAOFactory {
     private String user = "root";
     private String password = "admin";
 
+    private static Logger log = Logger.getLogger(DAOFactory.class);
+
     private DAOFactory() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             this.connection = DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException e) {
-            System.out.println("Database driver class can't be found!" + e);
+            log.error("Database driver class can't be found!", e);
         } catch (SQLException e) {
-            System.out.println("Database connection creation failed!" + e);
+            log.error("Database connection creation failed!", e);
         }
     }
 
@@ -30,14 +34,16 @@ public class DAOFactory {
 
     public static DAOFactory getInstance() {
         if (instance == null) {
+            log.trace("Opening connection...");
             instance = new DAOFactory();
         } else
             try {
                 if (instance.getConnection().isClosed()) {
+                    log.trace("Reopening connection...");
                     instance = new DAOFactory();
                 }
             } catch (SQLException e) {
-                System.out.println("Database access error!" + e);
+                log.error("Database access error!", e);
             }
 
         return instance;

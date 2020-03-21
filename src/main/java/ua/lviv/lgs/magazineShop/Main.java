@@ -1,6 +1,8 @@
 package ua.lviv.lgs.magazineShop;
 
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import ua.lviv.lgs.magazineShop.dao.DAOException;
 import ua.lviv.lgs.magazineShop.dao.MagazineDAO;
 import ua.lviv.lgs.magazineShop.dao.SubscribeDAO;
@@ -11,9 +13,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Main {
 
     public static void main(String[] args) throws DAOException {
+        Logger log = Logger.getLogger(Main.class);
+        PropertyConfigurator.configure("log4j.config.properties");
+        log.trace("Starting application...");
+
         List<User> userList = new ArrayList<>();
         userList.add(new User("Іван", "Петренко", "petrenko@gmail.com", "123456", "USER"));
         userList.add(new User("Василь", "Дубовий", "vas_dyb@gmail.com", "123456", "USER"));
