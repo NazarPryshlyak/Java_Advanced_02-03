@@ -1,4 +1,4 @@
-# Java_Advanced_02
+# Java_Advanced_02 та JavaAdvanced_Lesson-03
 
 1.Створити БД 
 
@@ -9,7 +9,7 @@
 4. Реалізувати CRUD операції для кожного DAO класу . 
 
 
-JavaAdvanced_Lesson-03
+
 Log4j Logging
 
 Проектуємо Інтернет-магазин журналів.
